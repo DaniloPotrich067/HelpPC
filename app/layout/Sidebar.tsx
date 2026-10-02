@@ -32,7 +32,9 @@ export default function Sidebar() {
 
       {/* Logo com ajuste condicional para não quebrar o layout quando encolhida */}
       <div className="flex items-center gap-3 mb-4 overflow-hidden">
-        <Image src={logo} alt="Logo" width={40} height={40} priority className="flex-shrink-0" />
+        <Link href="/">
+          <Image src={logo} alt="Logo" width={40} height={40} priority className="flex-shrink-0 rounded" />
+        </Link>
         {isOpen && <h2 className="text-xl font-bold transition-opacity duration-300">Menu</h2>}
       </div>
 
@@ -51,9 +53,15 @@ export default function Sidebar() {
           </Link>
         </li>
         <li className="mb-2">
-          <Link href="/services" className="hover:bg-gray-700 rounded p-2 flex items-center gap-3 w-full transition-colors">
+          <Link href="/servicos" className="hover:bg-gray-700 rounded p-2 flex items-center gap-3 w-full transition-colors">
             <span className="text-lg">🛠️</span>
             {isOpen && <span className="whitespace-nowrap">Serviços</span>}
+          </Link>
+        </li>
+        <li className="mb-2">
+          <Link href="/contato" className="hover:bg-gray-700 rounded p-2 flex items-center gap-3 w-full transition-colors">
+            <span className="text-lg">📲</span>
+            {isOpen && <span className="whitespace-nowrap">Contato</span>}
           </Link>
         </li>
       </ul>
