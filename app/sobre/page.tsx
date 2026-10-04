@@ -19,6 +19,7 @@ import {
 } from "@/app/components/icons";
 import logo from "@/public/HelpIcon.svg";
 import Button from "@/app/components/Button";
+import { gerarLinkWhatsApp } from "@/app/lib/catalogo-comercial";
 
 export const metadata: Metadata = {
   title: "Sobre a assistência técnica Help PC",
@@ -27,11 +28,10 @@ export const metadata: Metadata = {
     "Conheça a Help PC, assistência técnica de informática em Dourados-MS, e veja como funciona nosso atendimento para computadores e notebooks.",
 };
 
-const whatsapp =
-  "https://wa.me/5567999001081?text=" +
-  encodeURIComponent(
-    "Olá! Conheci a Help PC pelo site e gostaria de solicitar um orçamento.\n\nOrigem: página Sobre"
-  );
+const whatsapp = gerarLinkWhatsApp(
+  "Olá! Conheci a Help PC pelo site e gostaria de solicitar um orçamento.",
+  "página Sobre",
+);
 
 const principios = [
   {

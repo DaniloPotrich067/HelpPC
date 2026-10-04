@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { BsArrowRight, BsEnvelope, BsGeoAlt } from "@/app/components/icons";
 import FormularioContato from "../components/FormularioContato";
+import { gerarLinkWhatsApp } from "@/app/lib/catalogo-comercial";
 
 export const metadata: Metadata = {
   title: "Contato e orçamento de assistência técnica",
@@ -67,7 +68,10 @@ export default function Contato() {
           <div className="mt-6 border-t border-slate-200 pt-5">
             <p className="text-sm font-bold text-slate-900">Prefere falar direto?</p>
             <a
-              href="https://wa.me/5567999001081"
+              href={gerarLinkWhatsApp(
+                "Olá! Quero conversar sobre um orçamento.",
+                "página de contato",
+              )}
               target="_blank"
               rel="noopener noreferrer"
               className="mt-3 inline-flex items-center gap-2 rounded-lg bg-help-pc-accent px-4 py-3 text-sm font-bold text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-help-pc-accent-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-help-pc-primary focus-visible:ring-offset-2"

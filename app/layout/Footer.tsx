@@ -3,9 +3,7 @@ import Link from "next/link";
 import logo from "@/public/HelpIcon.svg";
 import { FaFacebook, FaHome, FaInstagram, FaWhatsapp } from "react-icons/fa";
 import ScrollToTopButton from "@/app/components/ScrollToTopButton";
-
-const whatsappUrl =
-  "https://wa.me/5567999001081?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20Help%20PC%20e%20gostaria%20de%20saber%20mais%20sobre%20os%20servi%C3%A7os.";
+import { dadosComerciais, gerarLinkWhatsApp } from "@/app/lib/catalogo-comercial";
 
 export default function Footer() {
   return (
@@ -74,7 +72,10 @@ export default function Footer() {
       <div className="mx-auto mt-10 flex max-w-7xl flex-col gap-5 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex items-center gap-4" aria-label="Redes sociais">
           <a
-            href={whatsappUrl}
+            href={gerarLinkWhatsApp(
+              "Olá, vim pelo site da Help PC e gostaria de saber mais sobre os serviços.",
+              "rodapé",
+            )}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="WhatsApp da Help PC"
@@ -83,7 +84,7 @@ export default function Footer() {
             <FaWhatsapp className="h-5 w-5" aria-hidden="true" />
           </a>
           <a
-            href="https://www.instagram.com/helppc_067/"
+            href={dadosComerciais.contato.instagram}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Instagram da Help PC"
@@ -92,7 +93,7 @@ export default function Footer() {
             <FaInstagram className="h-5 w-5" aria-hidden="true" />
           </a>
           <a
-            href="https://www.facebook.com/profile.php?id=61593173941226"
+            href={dadosComerciais.contato.facebook}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Facebook da Help PC"

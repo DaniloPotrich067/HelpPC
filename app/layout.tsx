@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Sidebar from "./layout/Sidebar";
 import Footer from "./layout/Footer";
+import { dadosComerciais } from "@/app/lib/catalogo-comercial";
 
 export const metadata: Metadata = {
   metadataBase: process.env.NEXT_PUBLIC_SITE_URL
@@ -55,18 +56,21 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Organization",
-              name: "Help PC",
-              telephone: "+55-67-99900-1081",
+              name: dadosComerciais.nome,
+              telephone: dadosComerciais.contato.telefoneE164,
               url: process.env.NEXT_PUBLIC_SITE_URL || undefined,
               logo: process.env.NEXT_PUBLIC_SITE_URL
                 ? `${process.env.NEXT_PUBLIC_SITE_URL.replace(/\/$/, "")}/HelpIcon.svg`
                 : undefined,
-              areaServed: { "@type": "City", name: "Dourados" },
+              areaServed: {
+                "@type": "City",
+                name: dadosComerciais.local.cidade,
+              },
               description:
                 "Assistência técnica, formatação, manutenção e suporte para computadores e notebooks em Dourados-MS.",
               sameAs: [
-                "https://www.instagram.com/helppc_067/",
-                "https://www.facebook.com/profile.php?id=61593173941226",
+                dadosComerciais.contato.instagram,
+                dadosComerciais.contato.facebook,
               ],
             }),
           }}

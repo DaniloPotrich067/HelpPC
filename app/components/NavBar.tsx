@@ -1,9 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import logo from "@/public/HelpIcon.svg";
-
-const whatsappUrl =
-  "https://wa.me/5567999001081?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20Help%20PC%20e%20gostaria%20de%20solicitar%20um%20or%C3%A7amento.";
+import { gerarLinkWhatsApp } from "@/app/lib/catalogo-comercial";
 
 export default function NavBar() {
   return (
@@ -33,7 +31,10 @@ export default function NavBar() {
             Orçar pelo site
           </Link>
           <a
-            href={whatsappUrl}
+            href={gerarLinkWhatsApp(
+              "Olá, vim pelo site da Help PC e gostaria de solicitar um orçamento.",
+              "navegação principal",
+            )}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex min-h-11 items-center justify-center rounded-xl bg-help-pc-accent px-3 py-2 text-center text-xs font-bold text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-help-pc-accent-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-help-pc-primary focus-visible:ring-offset-2 sm:px-4 sm:text-sm"

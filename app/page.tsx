@@ -5,17 +5,20 @@ import Link from "next/link";
 import {
   BsArrowRight,
   BsChatDots,
-  BsClipboardCheck,
-  BsController,
   BsGeoAlt,
-  BsLaptop,
-  BsShieldCheck,
-  BsSpeedometer2,
-  BsTools,
 } from "@/app/components/icons";
 import Button from "@/app/components/Button";
+import ComboCard from "@/app/components/Catalogo/ComboCard";
 import NavBar from "@/app/components/NavBar";
 import logo from "@/public/HelpIcon.svg";
+import {
+  combosDestaqueHome,
+  dadosComerciais,
+  diferenciais,
+  formatarPreco,
+  gerarLinkWhatsApp,
+  servicosDestaqueHome,
+} from "@/app/lib/catalogo-comercial";
 
 export const metadata: Metadata = {
   title: "Assistência técnica e formatação de computadores",
@@ -23,35 +26,6 @@ export const metadata: Metadata = {
   description:
     "Assistência técnica em Dourados-MS para computadores e notebooks: formatação, manutenção, otimização e diagnóstico. Fale com a Help PC e peça um orçamento.",
 };
-
-const whatsapp =
-  "https://wa.me/5567999001081?text=" +
-  encodeURIComponent(
-    "Olá! Vim pelo site da Help PC e gostaria de solicitar um orçamento.\n\nOrigem: página inicial"
-  );
-
-const destaques = [
-  {
-    Icon: BsLaptop,
-    titulo: "Formatação",
-    descricao: "Configuração do sistema operacional para preparar seu computador para uso.",
-  },
-  {
-    Icon: BsSpeedometer2,
-    titulo: "PC lento?",
-    descricao: "Análise e ajustes para melhorar o desempenho do equipamento.",
-  },
-  {
-    Icon: BsTools,
-    titulo: "Limpeza e manutenção",
-    descricao: "Cuidados preventivos para computadores e notebooks.",
-  },
-  {
-    Icon: BsController,
-    titulo: "Limpeza de consoles",
-    descricao: "Serviços de limpeza e manutenção para consoles compatíveis.",
-  },
-];
 
 export default function Home() {
   return (
@@ -66,13 +40,13 @@ export default function Home() {
           <div>
             <span className="inline-flex items-center gap-2 rounded-full border border-help-pc-primary-400/30 bg-help-pc-primary-400/10 px-4 py-2 text-sm font-semibold text-help-pc-primary-200">
               <BsGeoAlt aria-hidden="true" />
-              Assistência técnica em Dourados-MS
+              Assistência técnica em {`${dadosComerciais.local.cidade}-${dadosComerciais.local.estado}`}
             </span>
 
             <h1 className="mt-7 text-4xl font-black leading-tight tracking-tight sm:text-6xl lg:text-7xl">
               Assistência técnica
               <span className="block text-help-pc-primary-400">
-                de computadores em Dourados.
+                de computadores em {dadosComerciais.local.cidade}.
               </span>
             </h1>
 
@@ -83,7 +57,13 @@ export default function Home() {
             </p>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Button href={whatsapp} className="gap-2 bg-help-pc-accent hover:bg-help-pc-accent-hover">
+              <Button
+                href={gerarLinkWhatsApp(
+                  "Olá! Vim pelo site da Help PC e gostaria de solicitar um orçamento.",
+                  "página inicial | chamada principal",
+                )}
+                className="gap-2 bg-help-pc-accent hover:bg-help-pc-accent-hover"
+              >
                 <BsChatDots aria-hidden="true" />
                 Solicitar orçamento
                 <BsArrowRight aria-hidden="true" />
@@ -123,7 +103,7 @@ export default function Home() {
 
               <div className="mt-7 flex items-center justify-center gap-2 rounded-xl bg-help-pc-primary-500/10 px-4 py-3 text-sm font-semibold text-help-pc-primary-200">
                 <BsGeoAlt aria-hidden="true" />
-                Dourados-MS e região
+                {dadosComerciais.local.regiaoExibicao}
               </div>
             </div>
           </div>
@@ -152,57 +132,60 @@ export default function Home() {
             </Link>
           </div>
 
-          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {destaques.map(({ Icon, titulo, descricao }) => (
+          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {servicosDestaqueHome.map((servico) => {
+              const Icon = servico.icone;
+              return (
               <article
-                key={titulo}
+                key={servico.id}
                 className="rounded-2xl border border-slate-200 bg-white p-6 transition hover:-translate-y-1 hover:border-help-pc-primary-300 hover:shadow-lg"
               >
                 <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-help-pc-primary-50 text-2xl text-help-pc-primary">
                   <Icon aria-hidden="true" />
                 </div>
-                <h3 className="mt-5 text-lg font-extrabold">{titulo}</h3>
-                <p className="mt-3 text-sm leading-6 text-slate-600">{descricao}</p>
+                <h3 className="mt-5 text-lg font-extrabold">{servico.nome}</h3>
+                <p className="mt-3 text-sm leading-6 text-slate-600">{servico.descricao}</p>
+                {servico.preco !== null && (
+                  <p className="mt-4 font-black text-help-pc-primary-hover">
+                    {formatarPreco(servico.preco)}
+                  </p>
+                )}
                 <Link
-                  href="/servicos"
+                  href={`/servicos#${servico.slug}`}
                   className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-help-pc-primary hover:underline"
                 >
                   Saiba mais <BsArrowRight aria-hidden="true" />
                 </Link>
               </article>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
 
-      <section className="px-6 pb-16 sm:pb-20">
-        <div className="mx-auto flex max-w-7xl flex-col justify-between gap-7 rounded-3xl bg-help-pc-accent p-7 text-white sm:p-10 lg:flex-row lg:items-center">
-          <div className="max-w-2xl">
-            <span className="inline-block rounded-full bg-white/15 px-3 py-1.5 text-xs font-bold uppercase tracking-wider">
-              Preço de entrada
-            </span>
-            <h2 className="mt-4 text-3xl font-black sm:text-4xl">
-              Serviços a partir de R$ 99,90.
-            </h2>
-            <p className="mt-3 leading-7 text-help-pc-accent-50">
-              Consulte os serviços contemplados, os valores e as condições
-              antes de contratar.
-            </p>
+      <section className="bg-help-pc-light px-6 py-16 sm:py-20">
+        <div className="mx-auto max-w-7xl">
+          <p className="font-bold uppercase tracking-widest text-help-pc-primary">
+            Pacotes Help PC
+          </p>
+          <h2 className="mt-3 text-3xl font-black sm:text-4xl">
+            Combos para cuidar do seu computador
+          </h2>
+          <p className="mt-4 max-w-2xl leading-7 text-slate-600">
+            Veja alguns pacotes e consulte a composição completa na página de serviços.
+          </p>
+          <div className="mt-8 grid gap-5 md:grid-cols-3">
+            {combosDestaqueHome.map((combo) => (
+              <ComboCard key={combo.id} combo={combo} compacto />
+            ))}
           </div>
-
-          <div className="flex shrink-0 flex-col gap-3">
-            <Button
-              href="/servicos#precos"
-              className="gap-2 bg-white text-help-pc-accent hover:bg-help-pc-accent-50 dark:bg-slate-800 dark:text-help-pc-accent-300 dark:hover:bg-slate-700"
-            >
-              Conferir preços <BsArrowRight aria-hidden="true" />
-            </Button>
-            <Button
-              href={whatsapp}
-              className="gap-2 border border-white/40 bg-transparent hover:bg-white/10"
-            >
-              <BsChatDots aria-hidden="true" />
-              Consultar pelo WhatsApp
+          <p className="mt-5 text-center text-sm leading-6 text-slate-600">
+            Nos combos que incluem Office, a modalidade e a validade da licença
+            precisam ser confirmadas antes da contratação.
+          </p>
+          <div className="mt-7 flex justify-center">
+            <Button href="/servicos#combos" className="gap-2">
+              Ver todos os serviços e combos <BsArrowRight aria-hidden="true" />
             </Button>
           </div>
         </div>
@@ -220,24 +203,8 @@ export default function Home() {
           </div>
 
           <div className="mt-10 grid gap-6 md:grid-cols-3">
-            {[
-              {
-                Icon: BsChatDots,
-                titulo: "Conversa sem complicação",
-                descricao: "Explique o problema diretamente pelo WhatsApp ou site.",
-              },
-              {
-                Icon: BsClipboardCheck,
-                titulo: "Orientação adequada",
-                descricao: "Entenda as opções de atendimento antes de decidir.",
-              },
-              {
-                Icon: BsShieldCheck,
-                titulo: "Preços transparentes",
-                descricao: "Consulte os valores e confirme o escopo antes da contratação.",
-              },
-            ].map(({ Icon, titulo, descricao }) => (
-              <article key={titulo} className="rounded-2xl bg-white p-7 shadow-sm">
+            {diferenciais.map(({ id, icone: Icon, titulo, descricao }) => (
+              <article key={id} className="rounded-2xl bg-white p-7 shadow-sm">
                 <Icon className="text-3xl text-help-pc-primary" aria-hidden="true" />
                 <h3 className="mt-4 font-extrabold">{titulo}</h3>
                 <p className="mt-2 text-sm leading-6 text-slate-600">{descricao}</p>
@@ -257,7 +224,13 @@ export default function Home() {
           </p>
 
           <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-            <Button href={whatsapp} className="gap-2 bg-help-pc-accent hover:bg-help-pc-accent-hover">
+            <Button
+              href={gerarLinkWhatsApp(
+                "Olá! Vim pelo site da Help PC e gostaria de solicitar um orçamento.",
+                "página inicial | chamada final",
+              )}
+              className="gap-2 bg-help-pc-accent hover:bg-help-pc-accent-hover"
+            >
               <BsChatDots aria-hidden="true" />
               Chamar no WhatsApp <BsArrowRight aria-hidden="true" />
             </Button>
