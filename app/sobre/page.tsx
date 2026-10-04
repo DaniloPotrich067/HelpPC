@@ -21,15 +21,10 @@ import logo from "@/public/HelpIcon.svg";
 import Button from "@/app/components/Button";
 
 export const metadata: Metadata = {
-  title: "Sobre | HelpPC",
+  title: "Sobre a assistência técnica Help PC",
+  alternates: { canonical: "/sobre" },
   description:
-    "Conheça a HelpPC e nossa proposta de assistência técnica em Dourados-MS.",
-  openGraph: {
-    title: "Sobre | HelpPC",
-    description:
-      "Conheça a HelpPC e nossa proposta de assistência técnica em Dourados-MS.",
-    type: "website",
-  },
+    "Conheça a Help PC, assistência técnica de informática em Dourados-MS, e veja como funciona nosso atendimento para computadores e notebooks.",
 };
 
 const whatsapp =

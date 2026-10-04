@@ -4,15 +4,10 @@ import { BsArrowRight, BsEnvelope, BsGeoAlt } from "@/app/components/icons";
 import FormularioContato from "../components/FormularioContato";
 
 export const metadata: Metadata = {
-  title: "Contato | HelpPC",
+  title: "Contato e orçamento de assistência técnica",
+  alternates: { canonical: "/contato" },
   description:
-    "Entre em contato com a HelpPC em Dourados-MS e solicite um orçamento para seu equipamento.",
-  openGraph: {
-    title: "Contato | HelpPC",
-    description:
-      "Entre em contato com a HelpPC em Dourados-MS e solicite um orçamento para seu equipamento.",
-    type: "website",
-  },
+    "Fale com a Help PC em Dourados-MS e solicite um orçamento para formatação, manutenção ou suporte técnico de computadores e notebooks.",
 };
 
 export default function Contato() {

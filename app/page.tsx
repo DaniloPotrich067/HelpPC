@@ -18,15 +18,10 @@ import NavBar from "@/app/components/NavBar";
 import logo from "@/public/HelpIcon.svg";
 
 export const metadata: Metadata = {
-  title: "Início | HelpPC",
+  title: "Assistência técnica e formatação de computadores",
+  alternates: { canonical: "/" },
   description:
-    "Assistência técnica em Dourados-MS para computadores, notebooks, impressoras e consoles.",
-  openGraph: {
-    title: "Início | HelpPC",
-    description:
-      "Assistência técnica em Dourados-MS para computadores, notebooks, impressoras e consoles.",
-    type: "website",
-  },
+    "Assistência técnica em Dourados-MS para computadores e notebooks: formatação, manutenção, otimização e diagnóstico. Fale com a Help PC e peça um orçamento.",
 };
 
 const whatsapp =
@@ -75,9 +70,9 @@ export default function Home() {
             </span>
 
             <h1 className="mt-7 text-4xl font-black leading-tight tracking-tight sm:text-6xl lg:text-7xl">
-              Seu computador merece
+              Assistência técnica
               <span className="block text-help-pc-primary-400">
-                uma solução de verdade.
+                de computadores em Dourados.
               </span>
             </h1>
 

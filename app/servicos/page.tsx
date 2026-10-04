@@ -19,15 +19,10 @@ import type { Metadata } from "next";
 import Button from "@/app/components/Button";
 
 export const metadata: Metadata = {
-  title: "Serviços | HelpPC",
+  title: "Formatação e manutenção de computadores",
+  alternates: { canonical: "/servicos" },
   description:
-    "Veja serviços de manutenção, formatação e suporte técnico da HelpPC em Dourados-MS.",
-  openGraph: {
-    title: "Serviços | HelpPC",
-    description:
-      "Veja serviços de manutenção, formatação e suporte técnico da HelpPC em Dourados-MS.",
-    type: "website",
-  },
+    "Conheça os serviços de formatação, manutenção, limpeza, otimização e suporte técnico para computadores em Dourados-MS. Consulte valores e solicite orçamento.",
 };
 
 const telefone = "5567999001081";
@@ -129,9 +124,9 @@ export default function Servicos() {
           </span>
 
           <h1 className="mt-7 max-w-3xl text-4xl font-black leading-tight sm:text-6xl">
-            Seu PC está dando dor de cabeça?
+            Formatação e manutenção de computadores
             <span className="mt-2 block text-help-pc-primary-400">
-              Vamos resolver isso.
+              em Dourados-MS.
             </span>
           </h1>
 
