@@ -15,6 +15,7 @@ export const metadata: Metadata = {
     "Assistência técnica em Dourados-MS: formatação, manutenção e suporte para computadores e notebooks. Consulte serviços e solicite um orçamento à Help PC.",
   applicationName: "Help PC",
   category: "technology",
+  icons: { icon: "/HelpIcon.svg" },
   keywords: [
     "assistência técnica em Dourados",
     "assistência técnica de computadores Dourados MS",
