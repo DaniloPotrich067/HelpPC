@@ -13,7 +13,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="pt-BR" className="h-full">
       {/* 1. Mudamos a body para englobar TUDO o que aparece na tela */}
-      <body className="min-h-screen flex m-0 p-0 bg-gray-50">
+      <body className="min-h-screen flex m-0 p-0 bg-gray-50 text-slate-900 dark:bg-help-pc-dark dark:text-slate-100">
         {/* 2. A Sidebar agora fica no lugar correto (lado esquerdo) */}
         <Sidebar />
 
