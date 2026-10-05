@@ -1,10 +1,15 @@
 'use client';
 
 import { useState } from 'react';
+import type { OpcaoOrcamento } from '@/app/lib/catalogo-comercial';
 
 const MAX_FILE_SIZE = 5 * 1024 * 1024;
 
-export default function FormularioContato() {
+type FormularioContatoProps = {
+    opcoesServico: readonly OpcaoOrcamento[];
+};
+
+export default function FormularioContato({ opcoesServico }: FormularioContatoProps) {
     const [file, setFile] = useState<File | null>(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
@@ -68,6 +73,8 @@ export default function FormularioContato() {
             setLoading(false);
         }
     }
+
+    const gruposServico = [...new Set(opcoesServico.map((opcao) => opcao.grupo))];
 
     return (
         <form
@@ -137,31 +144,21 @@ export default function FormularioContato() {
                     <option value="" disabled>
                         Selecione um serviço
                     </option>
-                    <option value="Manutenção de computador">
-                        Manutenção de computador
-                    </option>
-                    <option value="Limpeza de computador">
-                        Limpeza de computador
-                    </option>
-                    <option value="Formatação">
-                        Formatação
-                    </option>
-                    <option value="Instalação ou configuração">
-                        Instalação ou configuração
-                    </option>
-                    <option value="Impressora">
-                        Impressora
-                    </option>
-                    <option value="Upgrade ou troca de peças">
-                        Upgrade ou troca de peças
-                    </option>
-                    <option value="Manutenção de console">
-                        Manutenção de console
-                    </option>
-                    <option value="Outro serviço">
-                        Outro serviço
-                    </option>
+                    {gruposServico.map((grupo) => (
+                        <optgroup key={grupo} label={grupo}>
+                            {opcoesServico
+                                .filter((opcao) => opcao.grupo === grupo)
+                                .map((opcao) => (
+                                    <option key={opcao.valor} value={opcao.valor}>
+                                        {opcao.rotulo}
+                                    </option>
+                                ))}
+                        </optgroup>
+                    ))}
                 </select>
+                <p className="mt-1 text-sm text-gray-500">
+                    Os preços atuais aparecem junto a cada opção. O valor final depende do escopo e das condições do equipamento.
+                </p>
             </div>
 
             <div>
