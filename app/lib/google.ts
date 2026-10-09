@@ -12,7 +12,8 @@ function requiredEnv(name: string): string {
 }
 
 const clientEmail = requiredEnv('GOOGLE_CLIENT_EMAIL');
-const privateKey = requiredEnv('GOOGLE_PRIVATE_KEY').replace(/\\n/g, '\n');
+const privateKey = requiredEnv('GOOGLE_PRIVATE_KEY')
+  .replace(/\\n/g, '\n');
 
 export const spreadsheetId = requiredEnv('GOOGLE_SHEET_ID');
 export const driveFolderId = requiredEnv('GOOGLE_DRIVE_FOLDER_ID');

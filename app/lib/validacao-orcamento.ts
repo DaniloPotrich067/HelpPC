@@ -1,14 +1,11 @@
 
 export const MAX_FILE_SIZE = 5 * 1024 * 1024;
 
+import { combos, servicos } from './catalogo-comercial';
+
 export const SERVICES = [
-  'Manutenção de computador',
-  'Limpeza de computador',
-  'Formatação',
-  'Instalação ou configuração',
-  'Impressora',
-  'Upgrade ou troca de peças',
-  'Manutenção de console',
+  ...servicos.filter((servico) => servico.ativo).map((servico) => servico.nome),
+  ...combos.filter((combo) => combo.ativo).map((combo) => combo.nome),
   'Outro serviço',
 ] as const;
 

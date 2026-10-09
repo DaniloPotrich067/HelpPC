@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { BsArrowRight, BsEnvelope, BsGeoAlt } from "@/app/components/icons";
 import FormularioContato from "../components/FormularioContato";
-import { gerarLinkWhatsApp } from "@/app/lib/catalogo-comercial";
+import { gerarLinkWhatsApp, gerarOpcoesOrcamento } from "../lib/catalogo-comercial";
 
 export const metadata: Metadata = {
   title: "Contato e orçamento de assistência técnica",
@@ -49,7 +49,7 @@ export default function Contato() {
             Os campos marcados com asterisco são obrigatórios.
           </p>
           <div className="mt-7">
-            <FormularioContato />
+            <FormularioContato opcoesServico={gerarOpcoesOrcamento()} />
           </div>
         </div>
 

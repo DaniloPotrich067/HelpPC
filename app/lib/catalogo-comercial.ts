@@ -389,6 +389,43 @@ export const categoriasServicos: readonly {
   { id: "diagnostico", titulo: "Diagnóstico", descricao: "Identificação de problemas e orientação técnica." },
 ];
 
+export interface OpcaoOrcamento {
+  grupo: string;
+  valor: string;
+  rotulo: string;
+}
+
+export function gerarOpcoesOrcamento(): OpcaoOrcamento[] {
+  const opcoesServicos = categoriasServicos.flatMap((categoria) =>
+    servicos
+      .filter((servico) => servico.ativo && servico.categoria === categoria.id)
+      .map((servico) => {
+        const preco = servico.preco === null
+          ? "Sob consulta"
+          : `${servico.tipoPreco === "a partir de" ? "A partir de " : ""}${formatarPreco(servico.preco)}`;
+        const rotulo = `${servico.nome} — ${preco}`;
+        return { grupo: categoria.titulo, valor: rotulo, rotulo };
+      }),
+  );
+
+  const opcoesCombos = combos
+    .filter((combo) => combo.ativo)
+    .map((combo) => {
+      const rotulo = `${combo.nome} — ${formatarPreco(combo.preco)}`;
+      return {
+        grupo: "Combos",
+        valor: rotulo,
+        rotulo: combo.etiqueta ? `${combo.etiqueta}: ${rotulo}` : rotulo,
+      };
+    });
+
+  return [
+    ...opcoesServicos,
+    ...opcoesCombos,
+    { grupo: "Outros", valor: "Outro serviço — Sob consulta", rotulo: "Outro serviço — Sob consulta" },
+  ];
+}
+
 export function itensInclusosDoServico(servico: ServicoComercial): string[] {
   const visitar = (item: ServicoComercial, caminho: Set<string>): string[] => {
     if (caminho.has(item.id)) return [];
