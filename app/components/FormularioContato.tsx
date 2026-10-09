@@ -58,16 +58,25 @@ export default function FormularioContato({ opcoesServico }: FormularioContatoPr
                 body: formData,
             });
 
-            if (!response.ok) {
-                throw new Error('Não foi possível enviar sua solicitação.');
+            const result = (await response.json().catch(() => null)) as {
+                message?: string;
+                success?: boolean;
+            } | null;
+
+            if (!response.ok || result?.success !== true) {
+                throw new Error(
+                    result?.message || 'Não foi possível enviar sua solicitação.'
+                );
             }
 
             setSuccess(true);
             setFile(null);
             form.reset();
-        } catch {
+        } catch (submissionError) {
             setError(
-                'Não foi possível enviar o orçamento. Tente novamente mais tarde.'
+                submissionError instanceof Error
+                    ? submissionError.message
+                    : 'Não foi possível enviar o orçamento. Tente novamente mais tarde.'
             );
         } finally {
             setLoading(false);
