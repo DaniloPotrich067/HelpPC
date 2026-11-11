@@ -1,20 +1,30 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { BsArrowRight, BsEnvelope, BsGeoAlt } from "@/app/components/icons";
-import FormularioContato from "../components/FormularioContato";
-import { gerarLinkWhatsApp, gerarOpcoesOrcamento } from "../lib/catalogo-comercial";
+import FormularioContato from "@/app/components/FormularioContato";
+import { gerarLinkWhatsApp, gerarOpcoesOrcamento } from "@/app/lib/catalogo-comercial";
 
 export const metadata: Metadata = {
   title: "Contato e orçamento de assistência técnica",
   alternates: { canonical: "/contato" },
   description:
     "Fale com a Help PC em Dourados-MS e solicite um orçamento para formatação, manutenção ou suporte técnico de computadores e notebooks.",
+  openGraph: {
+    url: "/contato",
+    title: "Contato e orçamento de assistência técnica | Help PC Dourados",
+    description:
+      "Fale com a Help PC em Dourados-MS e solicite um orçamento.",
+    type: "website",
+    locale: "pt_BR",
+    siteName: "Help PC",
+  },
 };
 
 export default function Contato() {
   return (
+    <div className="p-3 sm:p-6">
     <section className="mx-auto w-full max-w-7xl overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
-      <div className="relative isolate overflow-hidden bg-gradient-to-br from-help-pc-dark via-help-pc-dark to-help-pc-primary-900 px-6 py-12 text-white sm:px-10 md:py-16 lg:px-14">
+      <div className="relative isolate overflow-hidden bg-gradient-to-br from-help-pc-dark via-help-pc-dark to-help-pc-primary-900 px-5 py-10 text-white sm:px-10 md:py-16 lg:px-14">
         <div className="pointer-events-none absolute -right-20 -top-28 -z-10 h-72 w-72 rounded-full bg-help-pc-primary-600/20 blur-3xl" />
         <span className="inline-flex items-center gap-2 rounded-full border border-help-pc-primary-400/30 bg-help-pc-primary-400/10 px-4 py-2 text-sm font-semibold text-help-pc-primary-200">
           <BsEnvelope aria-hidden="true" />
@@ -82,5 +92,6 @@ export default function Contato() {
         </aside>
       </div>
     </section>
+    </div>
   );
 }

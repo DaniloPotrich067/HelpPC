@@ -24,12 +24,15 @@ export const metadata: Metadata = {
   title: "Formatação e manutenção de computadores",
   alternates: { canonical: "/servicos" },
   description:
-    "Veja serviços de manutenção, formatação e suporte técnico da HelpPC em Dourados-MS.",
+    "Veja serviços de manutenção, formatação e suporte técnico da Help PC em Dourados-MS.",
   openGraph: {
-    title: "Serviços | HelpPC",
+    url: "/servicos",
+    title: "Formatação e manutenção de computadores | Help PC Dourados",
     description:
-      "Veja serviços de manutenção, formatação e suporte técnico da HelpPC em Dourados-MS.",
+      "Veja serviços de manutenção, formatação e suporte técnico da Help PC em Dourados-MS.",
     type: "website",
+    locale: "pt_BR",
+    siteName: "Help PC",
   },
 };
 
@@ -51,14 +54,14 @@ export default function Servicos() {
   ];
 
   return (
-    <main className="min-h-screen bg-help-pc-light text-slate-900">
-      <section className="bg-help-pc-dark px-6 py-20 text-white sm:py-24">
+    <div className="min-h-screen bg-help-pc-light text-slate-900">
+      <section className="bg-help-pc-dark px-4 py-14 text-white sm:px-6 sm:py-24">
         <div className="mx-auto max-w-6xl">
           <span className="inline-flex items-center gap-2 rounded-full border border-help-pc-primary-400/30 bg-help-pc-primary-400/10 px-4 py-2 text-sm font-semibold text-help-pc-primary-200">
             <BsGeoAlt aria-hidden="true" />
             {dadosComerciais.local.regiaoExibicao}
           </span>
-          <h1 className="mt-7 max-w-3xl text-4xl font-black leading-tight sm:text-6xl">
+          <h1 className="mt-7 max-w-3xl text-3xl font-black leading-tight sm:text-6xl">
             Formatação e manutenção de computadores
             <span className="mt-2 block text-help-pc-primary-400">
               em {dadosComerciais.local.cidade}-{dadosComerciais.local.estado}.
@@ -337,7 +340,7 @@ export default function Servicos() {
         </section>
       )}
 
-      <section className="px-6 py-16 sm:py-20">
+      <section className="px-4 py-12 sm:px-6 sm:py-20">
         <div className="mx-auto max-w-5xl rounded-3xl bg-help-pc-primary px-6 py-12 text-center text-white sm:px-12">
           <BsTools
             className="mx-auto text-4xl text-help-pc-primary-200"
@@ -371,6 +374,6 @@ export default function Servicos() {
           </div>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

@@ -6,11 +6,11 @@ import { gerarLinkWhatsApp } from "@/app/lib/catalogo-comercial";
 export default function NavBar() {
   return (
     <header className="border-b border-slate-200 bg-white px-4 py-4 sm:px-6 lg:px-8">
-      <div className="mx-auto flex max-w-7xl flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+      <div className="mx-auto flex max-w-7xl flex-col gap-4 sm:flex-row sm:items-center sm:justify-end lg:justify-between">
         <Link
           href="/"
           aria-label="Help PC, início"
-          className="flex w-fit items-center gap-3 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-help-pc-primary"
+          className="hidden w-fit lg:flex items-center gap-3 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-help-pc-primary"
         >
           <Image
             src={logo}

@@ -21,18 +21,27 @@ import {
 } from "@/app/lib/catalogo-comercial";
 
 export const metadata: Metadata = {
-  title: "Assistência técnica e formatação de computadores",
+  title: { absolute: "Assistência técnica de computadores em Dourados-MS | Help PC" },
   alternates: { canonical: "/" },
   description:
     "Assistência técnica em Dourados-MS para computadores e notebooks: formatação, manutenção, otimização e diagnóstico. Fale com a Help PC e peça um orçamento.",
+  openGraph: {
+    url: "/",
+    title: "Assistência técnica de computadores em Dourados-MS | Help PC",
+    description:
+      "Formatação, manutenção e suporte para computadores e notebooks em Dourados-MS. Solicite seu orçamento.",
+    type: "website",
+    locale: "pt_BR",
+    siteName: "Help PC",
+  },
 };
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-white text-slate-900 dark:bg-help-pc-dark dark:text-slate-100">
+    <div className="min-h-screen bg-white text-slate-900 dark:bg-help-pc-dark dark:text-slate-100">
       <NavBar />
 
-      <section className="relative isolate overflow-hidden bg-help-pc-dark px-6 py-20 text-white sm:py-28 lg:py-32">
+      <section className="relative isolate overflow-hidden bg-help-pc-dark px-4 py-14 text-white sm:px-6 sm:py-28 lg:py-32">
         <div className="pointer-events-none absolute -right-24 top-0 -z-10 h-96 w-96 rounded-full bg-help-pc-primary-600/30 blur-3xl" />
         <div className="pointer-events-none absolute -bottom-40 left-1/3 -z-10 h-80 w-80 rounded-full bg-help-pc-accent/20 blur-3xl" />
 
@@ -43,7 +52,7 @@ export default function Home() {
               Assistência técnica em {`${dadosComerciais.local.cidade}-${dadosComerciais.local.estado}`}
             </span>
 
-            <h1 className="mt-7 text-4xl font-black leading-tight tracking-tight sm:text-6xl lg:text-7xl">
+            <h1 className="mt-7 text-3xl font-black leading-tight tracking-tight sm:text-6xl lg:text-7xl">
               Assistência técnica
               <span className="block text-help-pc-primary-400">
                 de computadores em {dadosComerciais.local.cidade}.
@@ -110,7 +119,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="px-6 py-16 sm:py-20">
+      <section className="px-4 py-12 sm:px-6 sm:py-20">
         <div className="mx-auto max-w-7xl">
           <div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
             <div className="max-w-2xl">
@@ -163,7 +172,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-help-pc-light px-6 py-16 sm:py-20">
+      <section className="bg-help-pc-light px-4 py-12 sm:px-6 sm:py-20">
         <div className="mx-auto max-w-7xl">
           <p className="font-bold uppercase tracking-widest text-help-pc-primary">
             Pacotes Help PC
@@ -191,7 +200,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-help-pc-light px-6 py-16 sm:py-20">
+      <section className="bg-help-pc-light px-4 py-12 sm:px-6 sm:py-20">
         <div className="mx-auto max-w-7xl">
           <div className="mx-auto max-w-2xl text-center">
             <p className="font-bold uppercase tracking-widest text-help-pc-primary">
@@ -214,9 +223,9 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="px-6 py-16 sm:py-20">
+      <section className="px-4 py-12 sm:px-6 sm:py-20">
         <div className="mx-auto max-w-4xl text-center">
-          <h2 className="text-3xl font-black sm:text-5xl">
+          <h2 className="text-2xl font-black sm:text-5xl">
             Vamos resolver o problema do seu equipamento?
           </h2>
           <p className="mx-auto mt-5 max-w-2xl leading-7 text-slate-600">
@@ -240,6 +249,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

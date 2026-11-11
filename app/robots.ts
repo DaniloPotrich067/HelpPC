@@ -1,14 +1,13 @@
 import type { MetadataRoute } from "next";
+import { siteUrl } from "@/app/lib/site";
 
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: "/api/",
+      disallow: ["/api/", "/admin"],
     },
-    sitemap: process.env.NEXT_PUBLIC_SITE_URL
-      ? `${process.env.NEXT_PUBLIC_SITE_URL.replace(/\/$/, "")}/sitemap.xml`
-      : undefined,
+    sitemap: `${siteUrl}/sitemap.xml`,
   };
 }

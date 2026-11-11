@@ -4,6 +4,7 @@ import { useState } from 'react';
 import type { OpcaoOrcamento } from '@/app/lib/catalogo-comercial';
 
 const MAX_FILE_SIZE = 5 * 1024 * 1024;
+const MAX_SERVICES = 5;
 
 type FormularioContatoProps = {
     opcoesServico: readonly OpcaoOrcamento[];
@@ -14,6 +15,18 @@ export default function FormularioContato({ opcoesServico }: FormularioContatoPr
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const [success, setSuccess] = useState(false);
+    const [selectedServices, setSelectedServices] = useState<string[]>([]);
+
+    function toggleService(value: string, checked: boolean) {
+        setError('');
+        setSelectedServices((current) =>
+            checked
+                ? current.length >= MAX_SERVICES || current.includes(value)
+                    ? current
+                    : [...current, value]
+                : current.filter((item) => item !== value)
+        );
+    }
 
     function handleFileChange(
         event: React.ChangeEvent<HTMLInputElement>
@@ -40,6 +53,11 @@ export default function FormularioContato({ opcoesServico }: FormularioContatoPr
 
         setError('');
         setSuccess(false);
+
+        if (selectedServices.length === 0) {
+            setError('Selecione ao menos um serviço.');
+            return;
+        }
 
         const form = event.currentTarget;
         const formData = new FormData(form);
@@ -71,6 +89,7 @@ export default function FormularioContato({ opcoesServico }: FormularioContatoPr
 
             setSuccess(true);
             setFile(null);
+            setSelectedServices([]);
             form.reset();
         } catch (submissionError) {
             setError(
@@ -135,40 +154,48 @@ export default function FormularioContato({ opcoesServico }: FormularioContatoPr
                 </p>
             </div>
 
-            <div>
-                <label
-                    htmlFor="service"
-                    className="mb-2 block font-semibold text-gray-800"
-                >
-                    Qual serviço você precisa? *
-                </label>
+            <fieldset>
+                <legend className="mb-2 block font-semibold text-gray-800">
+                    Quais serviços você precisa? *
+                </legend>
 
-                <select
-                    id="service"
-                    name="service"
-                    required
-                    defaultValue=""
-                    className="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-help-pc-primary focus:ring-2 focus:ring-help-pc-primary/20"
-                >
-                    <option value="" disabled>
-                        Selecione um serviço
-                    </option>
+                <div className="space-y-4">
                     {gruposServico.map((grupo) => (
-                        <optgroup key={grupo} label={grupo}>
-                            {opcoesServico
-                                .filter((opcao) => opcao.grupo === grupo)
-                                .map((opcao) => (
-                                    <option key={opcao.valor} value={opcao.valor}>
-                                        {opcao.rotulo}
-                                    </option>
-                                ))}
-                        </optgroup>
+                        <div key={grupo}>
+                            <p className="mb-1 text-sm font-semibold text-slate-500">{grupo}</p>
+                            <div className="space-y-1">
+                                {opcoesServico
+                                    .filter((opcao) => opcao.grupo === grupo)
+                                    .map((opcao) => {
+                                        const checked = selectedServices.includes(opcao.valor);
+                                        const disabled = !checked && selectedServices.length >= MAX_SERVICES;
+
+                                        return (
+                                            <label
+                                                key={opcao.valor}
+                                                className="flex cursor-pointer items-start gap-3 rounded-lg border border-slate-200 px-3 py-2 text-sm text-slate-900 has-[:checked]:border-help-pc-primary has-[:checked]:bg-help-pc-primary-50 has-[:disabled]:cursor-not-allowed has-[:disabled]:opacity-50"
+                                            >
+                                                <input
+                                                    type="checkbox"
+                                                    name="service"
+                                                    value={opcao.valor}
+                                                    checked={checked}
+                                                    disabled={disabled}
+                                                    onChange={(event) => toggleService(opcao.valor, event.target.checked)}
+                                                    className="mt-0.5 h-4 w-4 shrink-0 accent-help-pc-primary"
+                                                />
+                                                <span>{opcao.rotulo}</span>
+                                            </label>
+                                        );
+                                    })}
+                            </div>
+                        </div>
                     ))}
-                </select>
-                <p className="mt-1 text-sm text-gray-500">
-                    Os preços atuais aparecem junto a cada opção. O valor final depende do escopo e das condições do equipamento.
+                </div>
+                <p className="mt-2 text-sm text-gray-500">
+                    Selecione até {MAX_SERVICES} serviços. Os preços atuais aparecem junto a cada opção. O valor final depende do escopo e das condições do equipamento.
                 </p>
-            </div>
+            </fieldset>
 
             <div>
                 <label

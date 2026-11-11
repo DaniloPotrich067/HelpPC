@@ -20,7 +20,7 @@ export default function CatalogoFiltros({
   return (
     <nav
       aria-label="Navegação do catálogo de serviços"
-      className={`sticky top-0 z-30 border-b border-slate-200 bg-white/95 px-6 py-4 shadow-sm backdrop-blur dark:border-slate-700 dark:bg-slate-900/95 ${className}`}
+      className={`sticky top-14 z-20 border-b border-slate-200 bg-white/95 px-4 py-3 sm:px-6 sm:py-4 lg:top-0 shadow-sm backdrop-blur dark:border-slate-700 dark:bg-slate-900/95 ${className}`}
     >
       <div className="mx-auto flex max-w-6xl flex-col gap-3 sm:flex-row sm:items-center sm:gap-5">
         <span className="shrink-0 text-sm font-bold text-slate-700">

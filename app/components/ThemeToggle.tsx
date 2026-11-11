@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useSyncExternalStore } from "react";
 import { FaMoon, FaSun } from "react-icons/fa";
 
 type Theme = "light" | "dark";
@@ -10,47 +10,55 @@ const STORAGE_KEY = "helppc-theme";
 function applyTheme(theme: Theme) {
   document.documentElement.classList.toggle("dark", theme === "dark");
   document.documentElement.style.colorScheme = theme;
-  window.dispatchEvent(new CustomEvent("helppc-theme-change", { detail: theme }));
+  window.dispatchEvent(new CustomEvent(THEME_EVENT, { detail: theme }));
+}
+
+const THEME_EVENT = "helppc-theme-change";
+
+function readStoredTheme(): Theme | null {
+  const stored = window.localStorage.getItem(STORAGE_KEY);
+  return stored === "dark" || stored === "light" ? stored : null;
+}
+
+// A fonte da verdade é a classe "dark" no <html>; o componente apenas a observa.
+function subscribe(onChange: () => void) {
+  const media = window.matchMedia("(prefers-color-scheme: dark)");
+
+  function syncSystemTheme(event: MediaQueryListEvent) {
+    if (!readStoredTheme()) {
+      applyTheme(event.matches ? "dark" : "light");
+    }
+  }
+
+  media.addEventListener("change", syncSystemTheme);
+  window.addEventListener(THEME_EVENT, onChange);
+
+  return () => {
+    media.removeEventListener("change", syncSystemTheme);
+    window.removeEventListener(THEME_EVENT, onChange);
+  };
+}
+
+function getSnapshot(): Theme {
+  return document.documentElement.classList.contains("dark") ? "dark" : "light";
+}
+
+function getServerSnapshot(): Theme {
+  return "light";
 }
 
 export default function ThemeToggle() {
-  const [theme, setTheme] = useState<Theme | null>(null);
+  const theme = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
   useEffect(() => {
-    const media = window.matchMedia("(prefers-color-scheme: dark)");
-    const storedTheme = window.localStorage.getItem(STORAGE_KEY);
-    const savedTheme: Theme | null =
-      storedTheme === "dark" || storedTheme === "light" ? storedTheme : null;
-    const initialTheme = savedTheme ?? (media.matches ? "dark" : "light");
-
-    applyTheme(initialTheme);
-    setTheme(initialTheme);
-
-    function syncToggle(event: Event) {
-      setTheme((event as CustomEvent<Theme>).detail);
-    }
-
-    function syncSystemTheme(event: MediaQueryListEvent) {
-      if (!window.localStorage.getItem(STORAGE_KEY)) {
-        const nextTheme = event.matches ? "dark" : "light";
-        applyTheme(nextTheme);
-        setTheme(nextTheme);
-      }
-    }
-
-    media.addEventListener("change", syncSystemTheme);
-    window.addEventListener("helppc-theme-change", syncToggle);
-    return () => {
-      media.removeEventListener("change", syncSystemTheme);
-      window.removeEventListener("helppc-theme-change", syncToggle);
-    };
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    applyTheme(readStoredTheme() ?? (prefersDark ? "dark" : "light"));
   }, []);
 
   function toggleTheme() {
-    const nextTheme = theme === "dark" ? "light" : "dark";
+    const nextTheme: Theme = theme === "dark" ? "light" : "dark";
     window.localStorage.setItem(STORAGE_KEY, nextTheme);
     applyTheme(nextTheme);
-    setTheme(nextTheme);
   }
 
   const isDark = theme === "dark";

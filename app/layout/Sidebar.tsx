@@ -42,7 +42,7 @@ export default function Sidebar() {
           onClick={() => isMobile && setIsMobileOpen(false)}
           className={twMerge(
             clsx(
-              "flex items-center gap-3 border-l-4 px-4 py-3 text-sm font-semibold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-help-pc-primary",
+              "flex min-h-12 items-center gap-3 border-l-4 px-4 py-3 text-base lg:text-sm font-semibold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-help-pc-primary",
               isActive
                 ? "border-help-pc-primary bg-help-pc-primary/10 text-help-pc-primary"
                 : "border-transparent text-slate-600 hover:bg-slate-100 hover:text-slate-900",
@@ -58,23 +58,39 @@ export default function Sidebar() {
 
   return (
     <>
-      <button
-        type="button"
-        aria-label={isMobileOpen ? "Fechar menu" : "Abrir menu"}
-        aria-expanded={isMobileOpen}
-        aria-controls="mobile-navigation"
-        onClick={() => setIsMobileOpen((open) => !open)}
-        className="fixed bottom-5 left-5 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-help-pc-primary text-xl text-white shadow-lg transition-all duration-200 hover:-translate-y-0.5 hover:bg-help-pc-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-help-pc-primary focus-visible:ring-offset-2 lg:hidden"
-      >
-        {isMobileOpen ? <BsX aria-hidden="true" /> : <BsList aria-hidden="true" />}
-      </button>
+      <header className="fixed inset-x-0 top-0 z-30 flex h-14 items-center justify-between border-b border-slate-200 bg-white/95 px-4 backdrop-blur lg:hidden">
+        <Link
+          href="/"
+          aria-label="Help PC, início"
+          className="flex items-center gap-2 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-help-pc-primary"
+        >
+          <Image
+            src={logo}
+            alt=""
+            width={32}
+            height={32}
+            className="h-8 w-8 shrink-0 object-contain"
+          />
+          <span className="text-lg font-black text-slate-900">Help PC</span>
+        </Link>
+        <button
+          type="button"
+          aria-label="Abrir menu"
+          aria-expanded={isMobileOpen}
+          aria-controls="mobile-navigation"
+          onClick={() => setIsMobileOpen(true)}
+          className="flex h-11 w-11 items-center justify-center rounded-lg bg-help-pc-primary text-2xl text-white transition-colors hover:bg-help-pc-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-help-pc-primary focus-visible:ring-offset-2"
+        >
+          <BsList aria-hidden="true" />
+        </button>
+      </header>
 
       {isMobileOpen && (
         <button
           type="button"
           aria-label="Fechar menu"
           onClick={() => setIsMobileOpen(false)}
-          className="fixed inset-0 z-40 bg-help-pc-dark/50 transition-opacity duration-200 lg:hidden"
+          className="fixed inset-0 z-40 bg-help-pc-dark/60 transition-opacity duration-200 lg:hidden"
         />
       )}
 
@@ -82,10 +98,18 @@ export default function Sidebar() {
         id="mobile-navigation"
         aria-hidden={!isMobileOpen}
         inert={!isMobileOpen}
-        className={`fixed inset-y-0 left-0 z-40 flex w-72 flex-col border-r border-slate-200 bg-white px-4 py-6 shadow-xl transition-transform duration-200 lg:hidden ${
+        className={`fixed inset-y-0 left-0 z-50 flex w-[80vw] max-w-72 flex-col overflow-y-auto border-r border-slate-200 bg-white px-4 py-6 shadow-xl transition-transform duration-200 lg:hidden ${
           isMobileOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
+        <button
+          type="button"
+          aria-label="Fechar menu"
+          onClick={() => setIsMobileOpen(false)}
+          className="absolute right-3 top-3 flex h-11 w-11 items-center justify-center rounded-lg text-2xl text-slate-600 hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-help-pc-primary"
+        >
+          <BsX aria-hidden="true" />
+        </button>
         <SidebarContent renderNavigation={() => renderNavigation(true)} />
       </aside>
 

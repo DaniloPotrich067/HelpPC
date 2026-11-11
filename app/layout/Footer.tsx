@@ -7,7 +7,7 @@ import { dadosComerciais, gerarLinkWhatsApp } from "@/app/lib/catalogo-comercial
 
 export default function Footer() {
   return (
-    <footer className="bg-help-pc-dark px-6 py-12 text-slate-300 md:px-12">
+    <footer className="bg-help-pc-dark px-4 py-10 text-slate-300 sm:px-6 md:px-12">
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 md:grid-cols-3 lg:grid-cols-4">
         <div>
           <Link

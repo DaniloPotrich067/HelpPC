@@ -1,13 +1,9 @@
 import type { Metadata } from "next";
+import { siteUrl } from "@/app/lib/site";
 import "./globals.css";
-import Sidebar from "./layout/Sidebar";
-import Footer from "./layout/Footer";
-import { dadosComerciais } from "@/app/lib/catalogo-comercial";
 
 export const metadata: Metadata = {
-  metadataBase: process.env.NEXT_PUBLIC_SITE_URL
-    ? new URL(process.env.NEXT_PUBLIC_SITE_URL)
-    : undefined,
+  metadataBase: new URL(siteUrl),
   title: {
     default: "Assistência Técnica de Computadores em Dourados | Help PC",
     template: "%s | Help PC Dourados",
@@ -16,7 +12,7 @@ export const metadata: Metadata = {
     "Assistência técnica em Dourados-MS: formatação, manutenção e suporte para computadores e notebooks. Consulte serviços e solicite um orçamento à Help PC.",
   applicationName: "Help PC",
   category: "technology",
-  icons: { icon: "/HelpIcon.svg" },
+  icons: { icon: [{ url: "/HelpIcon.svg", type: "image/svg+xml" }] },
   keywords: [
     "assistência técnica em Dourados",
     "assistência técnica de computadores Dourados MS",
@@ -33,7 +29,7 @@ export const metadata: Metadata = {
       "Formatação, manutenção e suporte para computadores e notebooks em Dourados-MS. Solicite seu orçamento.",
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: "Assistência Técnica de Computadores em Dourados | Help PC",
     description:
       "Formatação, manutenção e suporte para computadores e notebooks em Dourados-MS.",
@@ -50,42 +46,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html lang="pt-BR" className="h-full">
       {/* 1. Mudamos a body para englobar TUDO o que aparece na tela */}
       <body className="min-h-screen flex m-0 p-0 bg-gray-50 text-slate-900 dark:bg-help-pc-dark dark:text-slate-100">
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Organization",
-              name: dadosComerciais.nome,
-              telephone: dadosComerciais.contato.telefoneE164,
-              url: process.env.NEXT_PUBLIC_SITE_URL || undefined,
-              logo: process.env.NEXT_PUBLIC_SITE_URL
-                ? `${process.env.NEXT_PUBLIC_SITE_URL.replace(/\/$/, "")}/HelpIcon.svg`
-                : undefined,
-              areaServed: {
-                "@type": "City",
-                name: dadosComerciais.local.cidade,
-              },
-              description:
-                "Assistência técnica, formatação, manutenção e suporte para computadores e notebooks em Dourados-MS.",
-              sameAs: [
-                dadosComerciais.contato.instagram,
-                dadosComerciais.contato.facebook,
-              ],
-            }),
-          }}
-        />
-        {/* 2. A Sidebar agora fica no lugar correto (lado esquerdo) */}
-        <Sidebar />
-
-        {/* 3. Criamos um container para o conteúdo e o Footer (lado direito) */}
-        <div className="flex-1 flex flex-col min-h-screen">
-          {/* O main vai ocupar todo o espaço restante e empurrar o Footer para o rodapé */}
-          <main className="flex-1 p-6">{children}</main>
-
-          {/* O Footer agora fica fixo na base deste container da direita */}
-          <Footer />
-        </div>
+        {children}
       </body>
     </html>
   );

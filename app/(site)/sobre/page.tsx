@@ -26,6 +26,15 @@ export const metadata: Metadata = {
   alternates: { canonical: "/sobre" },
   description:
     "Conheça a Help PC, assistência técnica de informática em Dourados-MS, e veja como funciona nosso atendimento para computadores e notebooks.",
+  openGraph: {
+    url: "/sobre",
+    title: "Sobre a assistência técnica Help PC | Help PC Dourados",
+    description:
+      "Conheça a Help PC, assistência técnica de informática em Dourados-MS.",
+    type: "website",
+    locale: "pt_BR",
+    siteName: "Help PC",
+  },
 };
 
 const whatsapp = gerarLinkWhatsApp(
@@ -91,8 +100,8 @@ const servicos = [
 
 export default function Sobre() {
   return (
-    <main className="min-h-screen bg-white text-slate-900">
-      <section className="bg-help-pc-dark px-6 py-20 text-white sm:py-28">
+    <div className="min-h-screen bg-white text-slate-900">
+      <section className="bg-help-pc-dark px-4 py-14 text-white sm:px-6 sm:py-28">
         <div className="mx-auto grid max-w-6xl items-center gap-10 md:grid-cols-[1fr_auto]">
           <div>
             <span className="inline-flex items-center gap-2 rounded-full border border-help-pc-primary-400/30 bg-help-pc-primary-400/10 px-4 py-2 text-sm font-semibold text-help-pc-primary-200">
@@ -100,7 +109,7 @@ export default function Sobre() {
               Conheça a Help PC
             </span>
 
-            <h1 className="mt-6 max-w-3xl text-4xl font-black leading-tight sm:text-6xl">
+            <h1 className="mt-6 max-w-3xl text-3xl font-black leading-tight sm:text-6xl">
               Tecnologia sem complicação.
               <span className="mt-3 block text-help-pc-primary-400">
                 Esse é o nosso propósito.
@@ -138,7 +147,7 @@ export default function Sobre() {
         </div>
       </section>
 
-      <section className="px-6 py-16 sm:py-20">
+      <section className="px-4 py-12 sm:px-6 sm:py-20">
         <div className="mx-auto grid max-w-6xl gap-12 md:grid-cols-2 md:items-start">
           <div>
             <p className="font-bold uppercase tracking-widest text-help-pc-primary">
@@ -198,7 +207,7 @@ export default function Sobre() {
         </div>
       </section>
 
-      <section className="bg-help-pc-light px-6 py-16 sm:py-20">
+      <section className="bg-help-pc-light px-4 py-12 sm:px-6 sm:py-20">
         <div className="mx-auto max-w-6xl">
           <p className="font-bold uppercase tracking-widest text-help-pc-primary">
             O que fazemos
@@ -233,7 +242,7 @@ export default function Sobre() {
         </div>
       </section>
 
-      <section className="px-6 py-16 sm:py-20">
+      <section className="px-4 py-12 sm:px-6 sm:py-20">
         <div className="mx-auto max-w-5xl rounded-3xl bg-help-pc-primary px-6 py-12 text-center text-white sm:px-12">
           <BsCheckCircle className="mx-auto text-4xl text-help-pc-primary-200" aria-hidden="true" />
 
@@ -259,6 +268,6 @@ export default function Sobre() {
           </div>
         </div>
       </section>
-    </main>
+    </div>
   );
 }
