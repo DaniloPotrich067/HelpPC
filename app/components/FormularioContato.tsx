@@ -107,7 +107,7 @@ export default function FormularioContato({ opcoesServico }: FormularioContatoPr
     return (
         <form
             onSubmit={handleSubmit}
-            className="w-full max-w-lg space-y-5 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8"
+            className="w-full max-w-none space-y-5 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8"
         >
             <div>
                 <label
@@ -173,7 +173,7 @@ export default function FormularioContato({ opcoesServico }: FormularioContatoPr
                                         return (
                                             <label
                                                 key={opcao.valor}
-                                                className="flex cursor-pointer items-start gap-3 rounded-lg border border-slate-200 px-3 py-2 text-sm text-slate-900 has-[:checked]:border-help-pc-primary has-[:checked]:bg-help-pc-primary-50 has-[:disabled]:cursor-not-allowed has-[:disabled]:opacity-50"
+                                                className="flex min-h-11 cursor-pointer items-start gap-3 rounded-lg border border-slate-200 px-3 py-2.5 text-sm text-slate-950 transition-colors has-[:checked]:border-help-pc-primary has-[:checked]:bg-help-pc-primary-50 has-[:disabled]:cursor-not-allowed has-[:disabled]:opacity-50 dark:text-slate-100 dark:has-[:checked]:bg-help-pc-primary-900/50 dark:has-[:checked]:text-white"
                                             >
                                                 <input
                                                     type="checkbox"
