@@ -18,8 +18,24 @@ export default function SiteLayout({ children }: LayoutProps<"/">) {
         url: siteUrl,
         logo: `${siteUrl}/HelpIcon.svg`,
         image: `${siteUrl}/opengraph-image`,
+        openingHoursSpecification: {
+          "@type": "OpeningHoursSpecification",
+          dayOfWeek: [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday",
+          ],
+          opens: "00:00",
+          closes: "23:59",
+        },
         address: {
           "@type": "PostalAddress",
+          streetAddress: `${dadosComerciais.local.logradouro} - ${dadosComerciais.local.bairro}`,
+          postalCode: dadosComerciais.local.cep,
           addressLocality: dadosComerciais.local.cidade,
           addressRegion: dadosComerciais.local.estado,
           addressCountry: "BR",
@@ -33,6 +49,7 @@ export default function SiteLayout({ children }: LayoutProps<"/">) {
         sameAs: [
           dadosComerciais.contato.instagram,
           dadosComerciais.contato.facebook,
+          dadosComerciais.contato.perfilGoogle,
         ],
       }),
     }}

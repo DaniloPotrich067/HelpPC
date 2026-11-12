@@ -60,6 +60,12 @@ export default function Footer() {
           <p className="mt-4 text-sm leading-6 text-slate-400">
             Atendimento em Dourados-MS e região, conforme disponibilidade.
           </p>
+          <address className="mt-3 text-sm not-italic leading-6 text-slate-400">
+            {dadosComerciais.local.logradouro} - {dadosComerciais.local.bairro}
+            <br />
+            {dadosComerciais.local.cidade} - {dadosComerciais.local.estado},{" "}
+            {dadosComerciais.local.cep}
+          </address>
           <Link
             href="/contato"
             className="mt-4 inline-flex rounded-lg bg-help-pc-primary px-4 py-2.5 text-sm font-bold text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-help-pc-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-help-pc-primary focus-visible:ring-offset-2 focus-visible:ring-offset-help-pc-dark"

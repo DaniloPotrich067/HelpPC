@@ -68,12 +68,16 @@ export const dadosComerciais = {
     telefoneWhatsApp: "5567999001081",
     telefoneExibicao: "(67) 99900-1081",
     instagram: "https://www.instagram.com/helppc_067/",
+    perfilGoogle: "https://share.google/ry2vg2MiDUcuCyEDQ",
     facebook: "https://www.facebook.com/profile.php?id=61593173941226",
   },
   local: {
     cidade: "Dourados",
     estado: "MS",
     regiaoExibicao: "Dourados-MS e região",
+    logradouro: "R. Alfredo Richard Klein, 285",
+    bairro: "Parque Alvorada",
+    cep: "79823-440",
   },
   nome: "Help PC",
   servicosDestaqueHome: [
