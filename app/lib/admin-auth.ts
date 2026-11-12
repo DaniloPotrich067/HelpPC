@@ -42,11 +42,12 @@ export async function getClientIpHash(): Promise<string> {
 }
 
 /**
- * Formato de ADMIN_PASSWORD_HASH: scrypt$<salt hex>$<hash hex>.
+ * Formato de ADMIN_PASSWORD_HASH: scrypt:<salt hex>:<hash hex>.
  * Gere com: node scripts/hash-password.mjs
  */
 function verifyPassword(password: string, stored: string | undefined): boolean {
-  const [scheme, saltHex, hashHex] = (stored ?? "").split("$");
+  // Separador ":" evita a expansão de "$" do .env; "$" segue aceito (Vercel).
+  const [scheme, saltHex, hashHex] = (stored ?? "").trim().split(/[:$]/);
   const valid = scheme === "scrypt" && !!saltHex && !!hashHex;
 
   // Sempre executa o scrypt, para não vazar por tempo se a configuração é válida.
