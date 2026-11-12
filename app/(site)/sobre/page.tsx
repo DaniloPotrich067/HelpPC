@@ -171,6 +171,13 @@ export default function Sobre() {
             </p>
 
             <p className="mt-4 leading-8 text-slate-600">
+              Se você procura assistência técnica de computadores em Dourados,
+              a Help PC cuida de formatação, manutenção, limpeza, otimização e
+              suporte para notebooks, PCs, impressoras e consoles, com
+              atendimento direto pelo WhatsApp.
+            </p>
+
+            <p className="mt-4 leading-8 text-slate-600">
               Nosso objetivo é oferecer atendimento direto, com informações
               claras sobre os serviços, os valores e as condições de execução.
             </p>

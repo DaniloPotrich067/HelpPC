@@ -9,6 +9,7 @@ import {
 } from "@/app/components/icons";
 import Button from "@/app/components/Button";
 import ComboCard from "@/app/components/Catalogo/ComboCard";
+import FaqLocal from "@/app/components/FaqLocal";
 import NavBar from "@/app/components/NavBar";
 import logo from "@/public/HelpIcon.svg";
 import {
@@ -222,6 +223,57 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <section
+        aria-labelledby="local-titulo"
+        className="px-4 py-12 sm:px-6 sm:py-20"
+      >
+        <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-2">
+          <div>
+            <p className="font-bold uppercase tracking-widest text-help-pc-primary">
+              Assistência técnica em Dourados
+            </p>
+            <h2 id="local-titulo" className="mt-3 text-3xl font-black sm:text-4xl">
+              Informática para quem mora e trabalha em Dourados-MS
+            </h2>
+            <p className="mt-5 leading-8 text-slate-600">
+              A Help PC é uma assistência técnica de informática de Dourados,
+              em Mato Grosso do Sul. Cuidamos de computadores e notebooks de
+              moradores, estudantes e pequenos negócios da cidade e região, com
+              orçamento combinado antes de qualquer serviço.
+            </p>
+            <p className="mt-4 leading-8 text-slate-600">
+              Se você procura formatação de computador em Dourados, manutenção
+              de notebook, limpeza interna, instalação de programas ou suporte
+              para impressoras, fale direto com a gente pelo WhatsApp{" "}
+              {dadosComerciais.contato.telefoneExibicao}.
+            </p>
+          </div>
+
+          <div className="rounded-3xl bg-help-pc-light p-7 sm:p-9">
+            <h3 className="text-xl font-black">Como funciona o atendimento</h3>
+            <ol className="mt-6 space-y-5">
+              {[
+                ["Você descreve o problema", "Pelo WhatsApp ou pelo formulário do site."],
+                ["Alinhamos serviço e valor", "Explicamos as opções e combinamos o orçamento antes de executar."],
+                ["Serviço executado", "Seu equipamento volta a funcionar com o escopo combinado."],
+              ].map(([titulo, descricao], indice) => (
+                <li key={titulo} className="flex items-start gap-4">
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-help-pc-primary font-black text-white">
+                    {indice + 1}
+                  </span>
+                  <div>
+                    <h4 className="font-extrabold">{titulo}</h4>
+                    <p className="mt-1 text-sm leading-6 text-slate-600">{descricao}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <FaqLocal />
 
       <section className="px-4 py-12 sm:px-6 sm:py-20">
         <div className="mx-auto max-w-4xl text-center">

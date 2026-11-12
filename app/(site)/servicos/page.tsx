@@ -8,6 +8,7 @@ import {
 } from "@/app/components/icons";
 import Button from "@/app/components/Button";
 import CatalogoFiltros from "@/app/components/CatalogoFiltros";
+import FaqLocal from "@/app/components/FaqLocal";
 import {
   categoriasServicos,
   combos,
@@ -68,8 +69,9 @@ export default function Servicos() {
             </span>
           </h1>
           <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-300">
-            Manutenção, formatação, otimização e suporte técnico. Encontre o
-            serviço adequado e solicite seu orçamento.
+            Manutenção, formatação, otimização e suporte técnico para
+            computadores e notebooks em Dourados-MS. Encontre o serviço
+            adequado, veja os preços e solicite seu orçamento.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Button
@@ -374,6 +376,8 @@ export default function Servicos() {
           </div>
         </div>
       </section>
+
+      <FaqLocal />
     </div>
   );
 }

@@ -71,9 +71,10 @@ export default function Contato() {
             Atendimento local
           </h2>
           <p className="mt-3 leading-7 text-slate-600">
-            A Help PC atende Dourados-MS e região, conforme disponibilidade. Após
-            receber sua solicitação, vamos conversar sobre o equipamento, o escopo
-            do serviço e as opções de atendimento.
+            A Help PC é assistência técnica de informática em Dourados-MS e atende
+            a região, conforme disponibilidade. Após receber sua solicitação,
+            vamos conversar sobre o equipamento, o escopo do serviço, o valor e
+            as opções de atendimento.
           </p>
           <div className="mt-6 border-t border-slate-200 pt-5">
             <p className="text-sm font-bold text-slate-900">Prefere falar direto?</p>
